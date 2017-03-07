@@ -47,13 +47,16 @@ class RegexTester
     end
 end
 
-# regex = RegexTester.new
-# regex.pattern = /^(http:\/\/)?www\.\w+\.(com|edu|org)$/  # from test_arrays.rb
-# puts regex.pattern
-# regex.statements = %w[http://www.google.com apidock.com www.microsoft.com http://www.heimann-family.org http://www.kli.org http://www.acac.net http://www.cmu.edu http://is.hss.cmu.edu www.amazon.co.uk]
-# puts regex.statements
-# puts "------"
-# regex.test
+regex = RegexTester.new
+regex.pattern = /^(http:\/\/)?(www\.)?(\w+[-.]?)+\.(com|edu|org|net|uk)$/  # from test_arrays.rb
+puts regex.pattern
+regex.statements = %w[http://www.google.com apidock.com www.microsoft.com http://www.heimann-family.org http://www.kli.org http://www.acac.net http://www.cmu.edu http://is.hss.cmu.edu www.amazon.co.uk]
+puts regex.statements
+puts "------"
+regex.test
 
-cc = RegexTester.new
-cc.statements = %w[ .. second test array goes here .. ]
+# cc = RegexTester.new
+# cc.statements = %w[1234567890123456 1234-5678-9012-3456 1234\ 5678\ 9012\ 3456 1234567890]
+
+# cc.pattern = /^(\d{4}[ -]?){4}$/
+# cc.test
