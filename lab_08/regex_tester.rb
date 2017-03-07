@@ -5,8 +5,8 @@ class RegexTester
 
     attr_accessor :pattern
 
-    def statements=(statement)
-        @statements = statement
+    def statements
+        @statements
     end
 
     def statements=(arr)
@@ -27,10 +27,12 @@ class RegexTester
     end
 
     def test
-        if pattern_matches? @statement
-            puts "MATCH: #{@statement}"
-        else
-            STDERR.puts "NO MATCH: #{@statement}"
+        @statements.each do |item|
+            if pattern_matches?(item)
+                puts "MATCH #{item}" 
+            else
+                STDERR.puts "NO MATCH: #{item}"
+            end
         end
     end 
 
@@ -39,14 +41,19 @@ class RegexTester
         statement.match(@pattern) != nil
     end
 
+    def add_insult
+        STDERR.puts "-------------------------------------"
+        STDERR.puts "As a coding infidel, you are hereby sentenced to death.  The firing squad will be here shortly to carry out the execution.  Please remain seated until they arrive. Thank you for your cooperation."   
+    end
 end
 
-regex = RegexTester.new
-regex.pattern = /^(http:\/\/)?www\.\w+\.(com|edu|org)$/  # from test_arrays.rb
-puts regex.pattern
-regex.statement = "http://www.google.com"
-puts regex.statement
-puts "------"
-regex.test
-regex.statement = "apidock.com"
-regex.test
+# regex = RegexTester.new
+# regex.pattern = /^(http:\/\/)?www\.\w+\.(com|edu|org)$/  # from test_arrays.rb
+# puts regex.pattern
+# regex.statements = %w[http://www.google.com apidock.com www.microsoft.com http://www.heimann-family.org http://www.kli.org http://www.acac.net http://www.cmu.edu http://is.hss.cmu.edu www.amazon.co.uk]
+# puts regex.statements
+# puts "------"
+# regex.test
+
+cc = RegexTester.new
+cc.statements = %w[ .. second test array goes here .. ]
