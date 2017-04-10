@@ -28,7 +28,12 @@ class FriendsController < ApplicationController
 
     respond_to do |format|
       if @friend.save
-        format.html { redirect_to @friend, notice: 'Friend was successfully created.' }
+        # Provide an email confirmation if all is good...
+        FriendMailer.new_friend_msg(@friend).deliver
+
+        # Now a page confirmation as well...
+        flash[:notice] = "#{@friend.nickname} has been added as a friend and notified by email."
+        format.html { redirect_to @friend }
         format.json { render :show, status: :created, location: @friend }
       else
         format.html { render :new }
@@ -54,9 +59,15 @@ class FriendsController < ApplicationController
   # DELETE /friends/1
   # DELETE /friends/1.json
   def destroy
+    
+    # Provide an email confirmation if all is good...
+    FriendMailer.remove_friend_msg(@friend).deliver
+
+    # Now a page confirmation as well...
+    flash[:notice] = "#{@friend.nickname} has been removed as a friend and notified by email."
     @friend.destroy
     respond_to do |format|
-      format.html { redirect_to friends_url, notice: 'Friend was successfully destroyed.' }
+      format.html { redirect_to friends_url }
       format.json { head :no_content }
     end
   end
@@ -69,6 +80,6 @@ class FriendsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def friend_params
-      params.require(:friend).permit(:name, :nickname, :email, :phone, :website, :friendship_level)
+      params.require(:friend).permit(:name, :nickname, :email, :phone, :website, :friendship_level, :photo)
     end
 end

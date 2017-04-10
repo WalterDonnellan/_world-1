@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Town:</strong>
+  <%= @model.Town %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @model.name %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @model.state %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @model.description %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @model.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @model.longitude %>
+</p>
+
+<%= link_to 'Edit', edit_model_path(@model) %> |
+<%= link_to 'Back', models_path %>
